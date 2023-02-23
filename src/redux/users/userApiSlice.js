@@ -23,8 +23,8 @@ const userApiSlice = createApi({
         url: `/register`,
         method: 'POST',
         body: user,
-        providesTags: ['user'],
       }),
+      providesTags: ['user'],
     }),
 
     logInUser: builder.mutation({

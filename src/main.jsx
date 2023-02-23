@@ -7,13 +7,14 @@ import './index.css';
 import { persistor, store } from './redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import theme from './theme/theme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename="/">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ChakraProvider>
+          <ChakraProvider theme={theme}>
             <App />
           </ChakraProvider>
         </PersistGate>

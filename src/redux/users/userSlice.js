@@ -11,22 +11,23 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     register(state, { payload }) {
-      state.userName = payload.user.name;
-      state.token = payload.user.accessToken;
+      state.userName = payload.name;
+      state.token = payload.accessToken;
       state.isLoggedIn = true;
     },
     logIn: (state, { payload }) => {
-      state.userName = payload.user.name;
-      state.token = payload.user.accessToken;
+      console.log(payload);
+      state.userName = payload.name;
+      state.token = payload.accessToken;
       state.isLoggedIn = true;
     },
     logOut: state => {
-      state.user = {};
+      state.userName = null;
       state.token = null;
       state.isLoggedIn = false;
     },
     refresh: (state, { payload }) => {
-      state.userName = payload;
+      state.userName = payload.name;
       state.isLoggedIn = true;
     },
   },
