@@ -1,10 +1,12 @@
 import {
+  Badge,
+  Box,
   Card as CardChakra,
   CardBody,
   CardFooter,
+  Divider,
   Flex,
   IconButton,
-  Input,
   Text,
   Textarea,
   useToast,
@@ -17,6 +19,7 @@ import {
   MdOutlineModeEdit,
 } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import formatTime from '../../helpers/formatTime';
 import {
   useDeleteCardMutation,
   useUpdateCardMutation,
@@ -41,7 +44,7 @@ const Card = ({ boardId, card, ...props }) => {
         cardId: card._id,
       });
 
-      if (error) return toast({ title: error.message, status: 'error' });
+      if (error) return toast({ title: error.data.message, status: 'error' });
 
       dispatch(listsApiSlice.util.invalidateTags(['lists']));
       toast({ title: data.message, status: 'success' });
@@ -62,7 +65,7 @@ const Card = ({ boardId, card, ...props }) => {
         cardId: card._id,
         card: { message: newMessage },
       });
-      if (error) return toast({ title: error.message, status: 'error' });
+      if (error) return toast({ title: error.data.message, status: 'error' });
 
       dispatch(listsApiSlice.util.invalidateTags(['lists']));
       toast({ title: data.message, status: 'success' });
@@ -85,32 +88,42 @@ const Card = ({ boardId, card, ...props }) => {
         cursor={'pointer'}
         {...props}
       >
-        <CardBody>
+        <CardBody padding={'10px'} minH={'70px'}>
           {edit ? (
-            <Textarea defaultValue={newMessage} onChange={editHandler} />
+            <Textarea
+              defaultValue={newMessage}
+              variant={'main'}
+              onChange={editHandler}
+            />
           ) : (
             <Text>{message}</Text>
           )}
         </CardBody>
+        <Divider width={'90%'} mb={'5px'} mx={'auto'} opacity={'0.2'} />
         <CardFooter
           display={'flex'}
           justifyContent={'space-between'}
           alignItems={'center'}
           p={'0 10px'}
         >
-          <Text fontSize={'12px'}>updated: </Text>
+          <Box fontSize={'12px'} fontWeight={'700'}>
+            upd:{' '}
+            <Badge fontSize={'10px'} borderRadius={'3px'} colorScheme={'gray'}>
+              {formatTime(updatedAt)}
+            </Badge>
+          </Box>
           <Flex alignItems={'center'}>
             {edit ? (
               <Flex>
                 <IconButton
                   size={'sm'}
-                  variant={'addBtn'}
+                  variant={'close'}
                   icon={<MdOutlineClose />}
                   onClick={() => setEdit(false)}
                 />
                 <IconButton
                   size={'sm'}
-                  variant={'addBtn'}
+                  variant={'save'}
                   icon={<MdDone />}
                   isLoading={updateLoading}
                   onClick={updateHandler}

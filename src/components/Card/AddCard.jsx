@@ -51,7 +51,7 @@ const AddCard = ({ boardId }) => {
   const onSubmit = async ({ message }) => {
     try {
       const { data, error } = await addCard({ message, listId: boardId });
-      if (error) return toast({ title: error.message, status: 'error' });
+      if (error) return toast({ title: error.data.message, status: 'error' });
 
       dispatch(listsApiSlice.util.invalidateTags(['lists']));
 
@@ -66,7 +66,7 @@ const AddCard = ({ boardId }) => {
   return (
     <Popover placement="top" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
       <PopoverTrigger>
-        <Button variant={'addCard'}>
+        <Button variant={'addCard'} display={'flex'} size={'sm'} gap={'10px'}>
           <FiPlus />
           Add new card
         </Button>
@@ -76,17 +76,28 @@ const AddCard = ({ boardId }) => {
         <PopoverCloseButton />
         <PopoverHeader>Add card</PopoverHeader>
         <PopoverBody>
-          <Box as={'form'} onSubmit={handleSubmit(onSubmit)}>
+          <Box
+            as={'form'}
+            onSubmit={handleSubmit(onSubmit)}
+            display={'flex'}
+            flexDirection={'column'}
+            gap={'10px'}
+          >
             <FormControl isInvalid={errors.message}>
               <Textarea
                 type="text"
-                variant={'mainAuthForm'}
+                variant={'main'}
                 placeholder={'Please type something'}
                 {...register('message')}
               />
               <FormErrorMessage>{errors.message?.message}</FormErrorMessage>
             </FormControl>
-            <Button type={'submit'} isLoading={isLoading}>
+            <Button
+              size={'sm'}
+              variant={'mainFormBtn'}
+              type={'submit'}
+              isLoading={isLoading}
+            >
               Save
             </Button>
           </Box>

@@ -35,11 +35,31 @@ const addBoard = defineStyle({
   color: 'white',
   fontSize: '20px',
   fontSize: '18px',
-  borderRadius: 'full',
-  padding: '5px 5px',
+  border: '2px solid',
+  borderColor: 'accent',
+  borderRadius: '5px',
+  padding: '2px 2px',
 
   _hover: {
     backgroundColor: 'accentHover',
+  },
+});
+
+const close = defineStyle({
+  color: 'red',
+  fontSize: '20px',
+
+  _hover: {
+    color: 'red.300',
+  },
+});
+
+const save = defineStyle({
+  color: 'green',
+  fontSize: '20px',
+
+  _hover: {
+    color: 'green.300',
   },
 });
 
@@ -49,5 +69,7 @@ export const buttonTheme = defineStyleConfig({
     addBtn,
     addCard,
     addBoard,
+    close,
+    save,
   },
 });

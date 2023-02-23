@@ -54,6 +54,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -61,9 +62,9 @@ const Login = () => {
   const onSubmit = async credentials => {
     try {
       const { data, error } = await logInUser(credentials);
-      if (error?.message)
-        return toast({ title: error.message, status: 'error' });
-      toast({ title: data.message, type: 'success' });
+      console.log(error);
+      if (error) return toast({ title: error.data.message, status: 'error' });
+      toast({ title: data.message, status: 'success' });
       dispatch(logIn(data.user));
       reset();
     } catch (error) {
@@ -73,9 +74,19 @@ const Login = () => {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} width={'100%'} maxW={'md'} py={12} px={6}>
+      <Stack
+        spacing={8}
+        mx={'auto'}
+        my={'auto'}
+        maxW={{ base: 'sm', lg: 'md' }}
+        width={'100%'}
+        py={12}
+        px={{ base: 2, lg: 6 }}
+      >
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+            Sign in to your account
+          </Heading>
         </Stack>
         <Box
           as={'form'}

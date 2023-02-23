@@ -19,7 +19,7 @@ const listsApiSlice = createApi({
   tagTypes: ['lists'],
   endpoints: builder => ({
     getAllLists: builder.query({
-      query: () => `/`,
+      query: (sort) => `/?sortBy=${sort}`,
       keepUnusedDataFor: 30,
       providesTags: ['lists'],
     }),

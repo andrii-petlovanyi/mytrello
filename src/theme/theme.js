@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 import { buttonTheme } from './components/button.extend';
 import { inputTheme } from './components/input.extend';
+import { textareaTheme } from './components/textarea.extend';
 
 const breakpoints = {
   sm: '320px',
@@ -31,13 +32,14 @@ const styles = {
 };
 
 const fonts = {
-  //   heading: `'Montserat', sans-serif`,
-  //   body: `'Lato', sans-serif`,
+  heading: `'Inter', sans-serif`,
+  body: `'Inter', sans-serif`,
 };
 
 const components = {
   Button: buttonTheme,
   Input: inputTheme,
+  Textarea: textareaTheme,
 };
 
 const theme = extendTheme({

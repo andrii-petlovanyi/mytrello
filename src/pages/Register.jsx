@@ -69,7 +69,7 @@ const Register = () => {
     console.log(credentials);
     try {
       const { data, error } = await registerUser(credentials);
-      if (error) return toast({ title: error.message, status: 'error' });
+      if (error) return toast({ title: error.data.message, status: 'error' });
       dispatch(registerAction(data.user));
       toast({ title: data.message, status: 'success' });
       reset();
@@ -80,9 +80,18 @@ const Register = () => {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} width={'100%'} maxW={'md'} py={12} px={6}>
+      <Stack
+        spacing={8}
+        mx={'auto'}
+        maxW={{ base: 'sm', lg: 'md' }}
+        width={'100%'}
+        py={12}
+        px={{ base: 2, lg: 6 }}
+      >
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign up in system</Heading>
+          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+            Sign up in system
+          </Heading>
         </Stack>
         <Box
           as={'form'}
