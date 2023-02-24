@@ -31,7 +31,7 @@ const schema = yup.object().shape({
     .trim()
     .email('Email must be in format: email@domain.com')
     .min(6, 'Minimal email length is 6 symbols')
-    .max(32, 'Max email length is 32 symbols')
+    .max(62, 'Max email length is 62 symbols')
     .required('Email is required'),
   password: yup
     .string()
@@ -75,7 +75,7 @@ const Login = () => {
     <Stack
       spacing={8}
       mx={'auto'}
-      mt={{ base: '30px', md: '60px', lg: '100px' }}
+      mt={{ base: '30px', md: '60px', lg: '80px' }}
       height={'calc(100vh - 60px)'}
       maxW={{ base: 'sm', lg: 'md' }}
       width={'100%'}

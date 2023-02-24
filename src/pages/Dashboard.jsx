@@ -1,4 +1,4 @@
-import { Flex, IconButton, useToast } from '@chakra-ui/react';
+import { Flex, IconButton, Text, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import AddBoard from '../components/Board/AddBoard';
@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [currentItem, setCurrentItem] = useState(null);
   const [opacity, setOpacity] = useState(1);
 
-  const { data: res } = useGetAllListsQuery(sortBy);
+  const { data: res, isLoading } = useGetAllListsQuery(sortBy);
   const { lists: boards } = res || [];
 
   const sortHandler = () => {
@@ -91,25 +91,34 @@ const Dashboard = () => {
         alignItems={'flex-start'}
         onDragOver={e => dragOverContainerHandler(e)}
       >
-        {boards?.map(board => (
-          <Board
-            onDragOver={e => dragOverHandler(e)}
-            onDrop={e => dropHandler(e, board)}
-            key={board?._id}
-            board={board}
-          >
-            {board.cards.map(card => (
-              <Card
-                onDragStart={e => dragStarHandler(e, board, card)}
-                onDragEnd={e => dragEndHandler(e, board)}
-                key={card?._id}
-                card={card}
-                boardId={board._id}
-                opacity={card?._id == currentItem?._id ? opacity : 1}
-              />
-            ))}
-          </Board>
-        ))}
+        {!isLoading &&
+          (!!(boards?.length > 0) ? (
+            boards?.map(board => (
+              <Board
+                onDragOver={e => dragOverHandler(e)}
+                onDrop={e => dropHandler(e, board)}
+                key={board?._id}
+                board={board}
+              >
+                {!!(board?.cards?.length > 0) ? (
+                  board?.cards.map(card => (
+                    <Card
+                      onDragStart={e => dragStarHandler(e, board, card)}
+                      onDragEnd={e => dragEndHandler(e, board)}
+                      key={card?._id}
+                      card={card}
+                      boardId={board._id}
+                      opacity={card?._id == currentItem?._id ? opacity : 1}
+                    />
+                  ))
+                ) : (
+                  <Text>No cards. Please add</Text>
+                )}
+              </Board>
+            ))
+          ) : (
+            <Text>No boards in database</Text>
+          ))}
       </Flex>
     </>
   );
