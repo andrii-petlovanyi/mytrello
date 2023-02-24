@@ -10,15 +10,19 @@ const breakpoints = {
   xl: '1280px',
 };
 
-const shadows = {};
+const shadows = {
+  
+};
 
 const colors = {
   grassTeal: '#88ccca',
   main: '#dAdDdF',
-  textColor: '#222222',
+  textColor: '#303030',
   accent: '#776281',
+  logo: '#675271',
   accentHover: '#8873a2',
   box: '#c6cbd2aa',
+  boardBG: '#f2f2f2',
   postTitle: '#4E616D',
 };
 
@@ -26,7 +30,7 @@ const styles = {
   global: () => ({
     body: {
       bg: 'main',
-      color: 'primaryTextColor',
+      color: 'textColor',
     },
   }),
 };

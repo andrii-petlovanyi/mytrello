@@ -1,14 +1,18 @@
 import {
+  Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  Flex,
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 import { FiMenu } from 'react-icons/fi';
+import Navigation from './Navigation';
+import UserProfile from './UserProfile';
 
 const MobileMenu = ({ ...props }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,6 +26,7 @@ const MobileMenu = ({ ...props }) => {
         display={{ base: 'flex', lg: 'none' }}
         variant={'mainFormBtn'}
         icon={<FiMenu />}
+        aria-label={'Open mobile menu'}
         {...props}
       />
       <Drawer
@@ -33,9 +38,28 @@ const MobileMenu = ({ ...props }) => {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton variant={'mainFormBtn'} />
+          <DrawerCloseButton
+            variant={'mainFormBtn'}
+            aria-label={'Close mobile menu'}
+          />
 
-          <DrawerBody bg={'main'}></DrawerBody>
+          <DrawerBody
+            as={Flex}
+            bg={'main'}
+            alignItems={'center'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            gap={'30px'}
+          >
+            <UserProfile />
+            <Divider />
+
+            <Navigation
+              display={{ base: 'flex', lg: 'none' }}
+              justifyContent={'center'}
+              onClose={onClose}
+            />
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
     </>

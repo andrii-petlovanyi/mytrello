@@ -72,7 +72,7 @@ const AddBoard = () => {
           <IconButton
             size={'sm'}
             variant={'addBoard'}
-            aria-label={'Add board'}
+            aria-label={'Open popup add board'}
             icon={<FiPlus />}
           />
         </PopoverTrigger>
@@ -99,6 +99,7 @@ const AddBoard = () => {
               </FormControl>
               <Button
                 size={'sm'}
+                aria-label={'Add board submit'}
                 variant={'mainFormBtn'}
                 type={'submit'}
                 isLoading={isLoading}

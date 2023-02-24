@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
-import userReducer from './users/userSlice';
+import userReducer from './users/userSlice.js';
 
 import userApiSlice from './users/userApiSLice';
 import listsApiSlice from './lists/listsApiSlice';

@@ -66,7 +66,13 @@ const AddCard = ({ boardId }) => {
   return (
     <Popover placement="top" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
       <PopoverTrigger>
-        <Button variant={'addCard'} display={'flex'} size={'sm'} gap={'10px'}>
+        <Button
+          variant={'addCard'}
+          display={'flex'}
+          size={'sm'}
+          gap={'10px'}
+          aria-label={'Open popup add new card'}
+        >
           <FiPlus />
           Add new card
         </Button>
@@ -97,6 +103,7 @@ const AddCard = ({ boardId }) => {
               variant={'mainFormBtn'}
               type={'submit'}
               isLoading={isLoading}
+              aria-label={'Submit card'}
             >
               Save
             </Button>

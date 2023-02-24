@@ -13,15 +13,15 @@ import { BsSortDown, BsSortDownAlt } from 'react-icons/bs';
 const Dashboard = () => {
   const dispatch = useDispatch();
   const toast = useToast();
+
   const [moveCard] = useMoveCardMutation();
   const [sortBy, setSortBy] = useState('asc');
-
-  const { data: res } = useGetAllListsQuery(sortBy);
-  const { lists: boards } = res || [];
-
   const [currentBoard, setCurrentBoard] = useState(null);
   const [currentItem, setCurrentItem] = useState(null);
   const [opacity, setOpacity] = useState(1);
+
+  const { data: res } = useGetAllListsQuery(sortBy);
+  const { lists: boards } = res || [];
 
   const sortHandler = () => {
     if (sortBy == 'asc') {
@@ -47,21 +47,17 @@ const Dashboard = () => {
     e.preventDefault();
   };
 
-  const dragLeaveHandler = e => {};
-
   const dragStarHandler = (e, board, item) => {
     setCurrentBoard(board);
     setCurrentItem(item);
     setOpacity(0.6);
-
-    e.currentTarget.classList.add('dragging');
   };
 
-  const dragEndHandler = (e, board) => {
+  const dragEndHandler = () => {
     setOpacity(1);
   };
 
-  const dropHandler = async (e, board, item) => {
+  const dropHandler = async (e, board) => {
     e.preventDefault();
     try {
       await moveCard({
@@ -104,7 +100,6 @@ const Dashboard = () => {
           >
             {board.cards.map(card => (
               <Card
-                onDragLeave={e => dragLeaveHandler(e)}
                 onDragStart={e => dragStarHandler(e, board, card)}
                 onDragEnd={e => dragEndHandler(e, board)}
                 key={card?._id}

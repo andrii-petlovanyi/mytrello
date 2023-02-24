@@ -19,15 +19,15 @@ import {
   MdOutlineModeEdit,
 } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import formatTime from '../../helpers/formatTime';
 import {
   useDeleteCardMutation,
   useUpdateCardMutation,
 } from '../../redux/cards/cardsApiSlice';
 import listsApiSlice from '../../redux/lists/listsApiSlice';
+import { formatTime } from '../../helpers/formatTime';
 
 const Card = ({ boardId, card, ...props }) => {
-  const { message, updatedAt, updatedBy } = card;
+  const { message, updatedAt } = card;
 
   const [edit, setEdit] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
@@ -106,9 +106,14 @@ const Card = ({ boardId, card, ...props }) => {
           alignItems={'center'}
           p={'0 10px'}
         >
-          <Box fontSize={'12px'} fontWeight={'700'}>
+          <Box fontSize={'12px'} fontWeight={'600'}>
             upd:{' '}
-            <Badge fontSize={'10px'} borderRadius={'3px'} colorScheme={'gray'}>
+            <Badge
+              fontSize={'10px'}
+              textTransform={'lowercase'}
+              borderRadius={'3px'}
+              colorScheme={'gray'}
+            >
               {formatTime(updatedAt)}
             </Badge>
           </Box>
@@ -120,6 +125,7 @@ const Card = ({ boardId, card, ...props }) => {
                   variant={'close'}
                   icon={<MdOutlineClose />}
                   onClick={() => setEdit(false)}
+                  aria-label={'Close editor'}
                 />
                 <IconButton
                   size={'sm'}
@@ -127,6 +133,7 @@ const Card = ({ boardId, card, ...props }) => {
                   icon={<MdDone />}
                   isLoading={updateLoading}
                   onClick={updateHandler}
+                  aria-label={'Submit form update card'}
                 />
               </Flex>
             ) : (
@@ -134,6 +141,7 @@ const Card = ({ boardId, card, ...props }) => {
                 size={'sm'}
                 variant={'addBtn'}
                 icon={<MdOutlineModeEdit />}
+                aria-label={'Open editor card'}
                 onClick={() => setEdit(true)}
               />
             )}
@@ -143,6 +151,7 @@ const Card = ({ boardId, card, ...props }) => {
               onClick={deleteCardHandler}
               isLoading={deleteLoading}
               icon={<MdOutlineDeleteOutline />}
+              aria-label={'Delete card'}
             />
           </Flex>
         </CardFooter>

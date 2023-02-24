@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import {
-  Flex,
   Box,
   FormControl,
   FormLabel,
@@ -73,85 +72,86 @@ const Login = () => {
   };
 
   return (
-    <Flex align={'center'} justify={'center'}>
-      <Stack
-        spacing={8}
-        mx={'auto'}
-        my={'auto'}
-        maxW={{ base: 'sm', lg: 'md' }}
-        width={'100%'}
-        py={12}
-        px={{ base: 2, lg: 6 }}
-      >
-        <Stack align={'center'}>
-          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
-            Sign in to your account
-          </Heading>
-        </Stack>
-        <Box
-          as={'form'}
-          onSubmit={handleSubmit(onSubmit)}
-          rounded={'lg'}
-          bg={'box'}
-          boxShadow={'lg'}
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl isInvalid={errors.email}>
-              <FormLabel>Email address</FormLabel>
-              <Input
-                type="email"
-                variant={'mainAuthForm'}
-                placeholder={'Please type email'}
-                {...register('email')}
-              />
-              <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.password}>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  variant={'mainAuthForm'}
-                  type={show ? 'text' : 'password'}
-                  placeholder={'Please type password'}
-                  {...register('password')}
-                />
-                <InputRightElement>
-                  <IconButton
-                    size={'md'}
-                    variant={'ghostIB'}
-                    icon={show ? <BiShow /> : <BiHide />}
-                    onClick={handleClick}
-                  />
-                </InputRightElement>
-              </InputGroup>
-              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-            </FormControl>
-            <Stack spacing={3}>
-              <Button
-                mt={'10px'}
-                isLoading={isLoading}
-                type={'submit'}
-                variant={'mainFormBtn'}
-              >
-                Login
-              </Button>
-              <Text
-                fontSize={'14px'}
-                display={'flex'}
-                gap={'5px'}
-                justifyContent={'center'}
-              >
-                Dont have account?
-                <Link color={'accent'} as={NavLink} to={'/register'}>
-                  Register
-                </Link>
-              </Text>
-            </Stack>
-          </Stack>
-        </Box>
+    <Stack
+      spacing={8}
+      mx={'auto'}
+      mt={{ base: '30px', md: '60px', lg: '100px' }}
+      height={'calc(100vh - 60px)'}
+      maxW={{ base: 'sm', lg: 'md' }}
+      width={'100%'}
+      py={12}
+      px={{ base: 2, lg: 6 }}
+    >
+      <Stack align={'center'}>
+        <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+          Sign in to your account
+        </Heading>
       </Stack>
-    </Flex>
+      <Box
+        as={'form'}
+        onSubmit={handleSubmit(onSubmit)}
+        rounded={'lg'}
+        bg={'box'}
+        boxShadow={'lg'}
+        p={8}
+      >
+        <Stack spacing={4}>
+          <FormControl isInvalid={errors.email}>
+            <FormLabel>Email address</FormLabel>
+            <Input
+              type="email"
+              variant={'mainAuthForm'}
+              placeholder={'Please type email'}
+              {...register('email')}
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors.password}>
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
+              <Input
+                variant={'mainAuthForm'}
+                type={show ? 'text' : 'password'}
+                placeholder={'Please type password'}
+                {...register('password')}
+              />
+              <InputRightElement>
+                <IconButton
+                  size={'md'}
+                  variant={'ghostIB'}
+                  icon={show ? <BiShow /> : <BiHide />}
+                  onClick={handleClick}
+                  aria-label={'Show or hide password in field'}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
+          <Stack spacing={3}>
+            <Button
+              mt={'10px'}
+              isLoading={isLoading}
+              type={'submit'}
+              variant={'mainFormBtn'}
+              aria-label={'Submit login form'}
+            >
+              Login
+            </Button>
+            <Text
+              fontSize={'14px'}
+              display={'flex'}
+              gap={'5px'}
+              justifyContent={'center'}
+            >
+              Dont have account?
+              <Link color={'accent'} as={NavLink} to={'/register'}>
+                Register
+              </Link>
+            </Text>
+          </Stack>
+        </Stack>
+      </Box>
+    </Stack>
   );
 };
 

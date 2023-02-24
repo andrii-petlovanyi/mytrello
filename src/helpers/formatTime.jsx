@@ -1,4 +1,4 @@
-const formatTime = date => {
+export const formatTime = date => {
   const parsedDate = new Date(date);
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
@@ -19,5 +19,3 @@ const formatTime = date => {
     return `${days} ${days === 1 ? 'day' : 'days'} ago`;
   }
 };
-
-export default formatTime;

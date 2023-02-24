@@ -7,7 +7,7 @@ import { useLogOutUserMutation } from '../../redux/users/userApiSlice';
 import userSelectors from '../../redux/users/userSelectors';
 import { logOut } from '../../redux/users/userSlice';
 
-const Navigation = ({ ...props }) => {
+const Navigation = ({ onClose, ...props }) => {
   const toast = useToast();
   const isAuth = useSelector(userSelectors.isAuth);
   const [logOutUser, { isLoading }] = useLogOutUserMutation();
@@ -19,6 +19,10 @@ const Navigation = ({ ...props }) => {
       if (error) {
         return toast({ title: error.message, status: 'error' });
       }
+      if (onClose) {
+        onClose();
+      }
+
       dispatch(logOut());
       toast({ title: 'You log out successfully!', status: 'success' });
     } catch (error) {
@@ -39,16 +43,29 @@ const Navigation = ({ ...props }) => {
             variant={'mainFormBtn'}
             isLoading={isLoading}
             onClick={logoutHandler}
+            aria-label={'Log out from trello'}
           >
             Logout
           </Button>
         </>
       ) : (
         <>
-          <Button as={NavLink} to="login" variant={'mainFormBtn'}>
+          <Button
+            as={NavLink}
+            to="login"
+            variant={'mainFormBtn'}
+            onClick={onClose}
+            aria-label={'Go to login form'}
+          >
             Login
           </Button>
-          <Button as={NavLink} to="register" variant={'mainFormBtn'}>
+          <Button
+            as={NavLink}
+            to="register"
+            variant={'mainFormBtn'}
+            onClick={onClose}
+            aria-label={'Go to register form'}
+          >
             Register
           </Button>
         </>

@@ -1,8 +1,8 @@
 import { Divider, Flex, Heading, IconButton, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
-import AddCard from '../Card/AddCard';
 import { useDeleteListMutation } from '../../redux/lists/listsApiSlice';
+import AddCard from '../Card/AddCard';
 
 const Board = ({ board, children, ...props }) => {
   const toast = useToast();
@@ -25,8 +25,6 @@ const Board = ({ board, children, ...props }) => {
   return (
     <>
       <Flex
-        border={'1px solid'}
-        borderColor={'accent'}
         p={'10px'}
         borderRadius={'10px'}
         minW={'250px'}
@@ -35,6 +33,7 @@ const Board = ({ board, children, ...props }) => {
         flexDirection={'column'}
         justifyContent={'space-between'}
         gap={'10px'}
+        bg={'boardBG'}
         {...props}
       >
         <Flex flexDirection={'column'}>
@@ -62,7 +61,13 @@ const Board = ({ board, children, ...props }) => {
             borderColor={'accent'}
             opacity={'0.3'}
           />
-          <Flex pt={'20px'} gap={'20px'} flexDirection={'column'}>
+          <Flex
+            pt={'20px'}
+            gap={'10px'}
+            flexDirection={'column'}
+            maxH={'calc(100vh - 253px)'}
+            overflowY={'scroll'}
+          >
             {children}
           </Flex>
         </Flex>

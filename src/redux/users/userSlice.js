@@ -16,7 +16,6 @@ const usersSlice = createSlice({
       state.isLoggedIn = true;
     },
     logIn: (state, { payload }) => {
-      console.log(payload);
       state.userName = payload.name;
       state.token = payload.accessToken;
       state.isLoggedIn = true;
@@ -27,7 +26,7 @@ const usersSlice = createSlice({
       state.isLoggedIn = false;
     },
     refresh: (state, { payload }) => {
-      state.userName = payload.name;
+      state.userName = payload.user.name;
       state.isLoggedIn = true;
     },
   },
