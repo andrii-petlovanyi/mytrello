@@ -10,10 +10,6 @@ const breakpoints = {
   xl: '1280px',
 };
 
-const shadows = {
-  
-};
-
 const colors = {
   grassTeal: '#88ccca',
   main: '#dAdDdF',
@@ -48,7 +44,6 @@ const components = {
 
 const theme = extendTheme({
   colors,
-  shadows,
   styles,
   components,
   breakpoints,
