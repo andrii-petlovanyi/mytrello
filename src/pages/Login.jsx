@@ -95,8 +95,8 @@ const Login = () => {
         boxShadow={'lg'}
         p={8}
       >
-        <Stack spacing={4}>
-          <FormControl isInvalid={errors.email}>
+        <Stack spacing={6}>
+          <FormControl isInvalid={errors.email} position={'relative'}>
             <FormLabel>Email address</FormLabel>
             <Input
               type="email"
@@ -104,9 +104,11 @@ const Login = () => {
               placeholder={'Please type email'}
               {...register('email')}
             />
-            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+            <FormErrorMessage position={'absolute'} bottom={'-20px'}>
+              {errors.email?.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.password}>
+          <FormControl isInvalid={errors.password} position={'relative'}>
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input
@@ -125,7 +127,9 @@ const Login = () => {
                 />
               </InputRightElement>
             </InputGroup>
-            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            <FormErrorMessage position={'absolute'} bottom={'-20px'}>
+              {errors.password?.message}
+            </FormErrorMessage>
           </FormControl>
           <Stack spacing={3}>
             <Button

@@ -80,7 +80,7 @@ const Register = () => {
     <Stack
       spacing={8}
       mx={'auto'}
-      mt={{ base: '30px', md: '60px', lg: '80px' }}
+      mt={{ base: '30px', md: '40px' }}
       height={'calc(100vh - 60px)'}
       maxW={{ base: 'sm', lg: 'md' }}
       width={'100%'}
@@ -100,8 +100,8 @@ const Register = () => {
         boxShadow={'lg'}
         p={8}
       >
-        <Stack spacing={4}>
-          <FormControl isInvalid={errors.name}>
+        <Stack spacing={6}>
+          <FormControl isInvalid={errors.name} position={'relative'}>
             <FormLabel>Name</FormLabel>
             <Input
               type="text"
@@ -109,9 +109,11 @@ const Register = () => {
               placeholder={'Please type your name'}
               {...register('name')}
             />
-            <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+            <FormErrorMessage position={'absolute'} bottom={'-20px'}>
+              {errors.name?.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.email}>
+          <FormControl isInvalid={errors.email} position={'relative'}>
             <FormLabel>Email address</FormLabel>
             <Input
               type="email"
@@ -119,9 +121,11 @@ const Register = () => {
               placeholder={'Please type email'}
               {...register('email')}
             />
-            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+            <FormErrorMessage position={'absolute'} bottom={'-20px'}>
+              {errors.email?.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.password}>
+          <FormControl isInvalid={errors.password} position={'relative'}>
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input
@@ -140,7 +144,9 @@ const Register = () => {
                 />
               </InputRightElement>
             </InputGroup>
-            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            <FormErrorMessage position={'absolute'} bottom={'-20px'}>
+              {errors.password?.message}
+            </FormErrorMessage>
           </FormControl>
 
           <Stack spacing={3}>
